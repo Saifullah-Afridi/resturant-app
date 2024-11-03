@@ -1,16 +1,28 @@
-import React, { useState } from "react";
-import {
-  HiBars4,
-  HiMiniMagnifyingGlass,
-  HiOutlineShoppingBag,
-} from "react-icons/hi2";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavigationLinks from "./NavigationLinks";
 
 const HamburgerMenu = ({ open, setOpen }) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    if (open) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
   return (
     <>
       {open && (
-        <div className="fixed top-0 left-0 h-full w-full bg-gray-900 opacity-40 transition-opacity duration-300 ease-in-out"></div>
+        <div
+          className="fixed top-0 left-0 h-full w-full bg-gray-900 opacity-40 transition-opacity duration-300 ease-in-out"
+          onClick={() => setOpen(false)}
+        ></div>
       )}
       <div
         className={`fixed h-full w-[50%]  top-0 left-0 z-20 bg-white flex md:hidden flex-col p-3 gap-2 ${
@@ -27,16 +39,7 @@ const HamburgerMenu = ({ open, setOpen }) => {
         <h1 className="cursor-pointer text-2xl font-bold text-amber-500">
           Tomato.
         </h1>
-        <Link className="font-semibold  hover:border-b-2  hover:text-amber-600 transition-all duration-300">
-          Home
-        </Link>
-        <Link className="font-semibold  hover:border-b-2  hover:text-amber-600 transition-all duration-300 ">
-          Menu
-        </Link>
-
-        <Link className="font-semibold  hover:border-b-2  hover:text-amber-600 transition-all duration-300 ">
-          Contact Us
-        </Link>
+        <NavigationLinks open={open} />
       </div>
     </>
   );
