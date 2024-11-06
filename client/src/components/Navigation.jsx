@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { HiBars4 } from "react-icons/hi2";
 import HamburgerMenu from "./HamburgerMenu";
 import NavigationLinks from "./NavigationLinks";
+import Cart from "./Cart";
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -21,17 +21,11 @@ const Navigation = () => {
         <div className="flex items-center gap-4   ">
           <button
             type="button"
-            className=" hidden md:block rounded-full hover:bg-amber-300  p-2 transition-all duration-300"
+            className=" hidden md:block rounded-full hover:bg-amber-300  p-3 transition-all duration-300"
           >
             <HiMiniMagnifyingGlass />
           </button>
-          <button
-            type="button"
-            className="  rounded-full hover:bg-amber-300  p-2 transition-all duration-300"
-          >
-            <HiOutlineShoppingBag />
-          </button>
-
+          <Cart />
           <button
             type="button"
             className="hidden md:block border-[1px] rounded-3xl border-amber-500 py-[3px] px-2 hover:bg-amber-300 transition-all duration-300"
@@ -39,7 +33,7 @@ const Navigation = () => {
             Sign In
           </button>
           <div
-            className="block md:hidden rounded-full hover:bg-amber-300  p-2 transition-all duration-300"
+            className="block md:hidden rounded-full hover:bg-amber-300  p-3 transition-all duration-300"
             onClick={() => setOpen(true)}
           >
             <HiBars4 />
