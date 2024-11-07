@@ -9,7 +9,7 @@ import Cart from "./Cart";
 const Navigation = () => {
   const [open, setOpen] = useState(false);
   return (
-    <nav className="max-w-[1300px] w-[90%] mx-auto h-12 pt-4 ">
+    <nav className=" w-[90%] max-w-[1100px]  mx-auto h-12 pt-4 ">
       <div className="h-full flex justify-between items-center  ">
         <h1 className="cursor-pointer text-2xl font-bold text-amber-500">
           Tomato.

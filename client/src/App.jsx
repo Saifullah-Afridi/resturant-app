@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import ContactUs from "./pages/ContactUs";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/navbar/Navigation";
+import Home from "./components/Home/Home";
 
 const App = () => {
   return (
