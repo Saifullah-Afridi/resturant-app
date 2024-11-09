@@ -4,6 +4,7 @@ import Menu from "./pages/Menu";
 import ContactUs from "./pages/ContactUs";
 import Navigation from "./components/navbar/Navigation";
 import Home from "./components/Home/Home";
+import DishDetail from "./components/dishDetail.jsx/DishDetail";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" exact element={<Home />} />
         <Route path="/menu" exact element={<Menu />} />
         <Route path="/contact-us" exact element={<ContactUs />} />
+        <Route path="/dish-detail/:id" exact element={<DishDetail />} />
       </Routes>
     </BrowserRouter>
   );

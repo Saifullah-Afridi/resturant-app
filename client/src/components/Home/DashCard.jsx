@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
 import Rating from "./Rating";
 import { CartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
-const DashCard = ({ name, image, price, description }) => {
+const DashCard = ({ _id, name, image, price, description }) => {
   const [rating, setRating] = useState();
   const [quantity, setQuantity] = useState(0);
   const { addCartItem } = useContext(CartContext);
   return (
-    <div className=" mb-12 group cursor-pointer shadow-lg">
+    <div className=" mb-12 group flex flex-col overflow-hidden  cursor-pointer shadow-lg">
       <div className="relative">
         <img
           src={image}
@@ -38,15 +39,22 @@ const DashCard = ({ name, image, price, description }) => {
           </button>
         </div>
       </div>
-      <div className="p-2">
+      <div className="p-2 flex flex-col gap-4  ">
         <div className="flex justify-between items-center my-3  ">
-          <h3 className="font-medium">{name}</h3>
+          <h3 className="font-medium ">{name}</h3>
           <Rating rating={rating} setRating={setRating} />
         </div>
         <p className="text-gray-900">{description}</p>
-        <h4 className="text-amber-600 mt-2 text-lg font-semibold px-1 ">
-          ${price}
-        </h4>
+        <div className="flex justify-between items-center mb-1">
+          <h4 className="text-amber-600 mt-2 text-lg font-semibold px-1  ">
+            ${price}
+          </h4>
+          <Link to={`/dish-detail/${_id}`}>
+            <button className="bg-amber-400 p-2 px-3 rounded-md hover:bg-amber-300">
+              View Detail
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

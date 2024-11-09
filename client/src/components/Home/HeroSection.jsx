@@ -1,7 +1,7 @@
 import React from "react";
 const HeroSection = () => {
   return (
-    <div className=" h-[80vh] mt-4 bg-no-repeat  bg-cove bg-[url('header_img.png')] bg-center">
+    <div className=" h-[80vh]  bg-no-repeat  bg-cove bg-[url('header_img.png')] bg-center">
       <div className=" h-[82vh] w-[80%] mx-auto flex flex-col justify-center  ">
         <h1 className="text-4xl font-semibold text-white  leading-[50px] ">
           Order Your <br /> favourite Food here

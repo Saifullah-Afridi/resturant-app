@@ -19,14 +19,14 @@ const ExploreSection = ({ selectedCategory, setSelectedCategory }) => {
           <div
             key={menu.id}
             onClick={() => setSelectedCategory(menu.name)}
-            className={`inline-block  md:flex     flex-col items-center mb-4  hover:scale-105 transition-all duration-300   `}
+            className={`inline-block  md:flex  flex-col items-center mb-4  hover:scale-105 transition-all duration-300  overflow-hidden  cursor-pointer`}
           >
             <img
               src={menu.image}
               alt="menu-image"
               className={` p-1 ${
                 selectedCategory === menu.name
-                  ? "border-2 border-amber-600  rounded-full"
+                  ? "border-4 border-amber-600  rounded-full"
                   : ""
               }`}
             />

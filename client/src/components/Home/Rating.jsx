@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const Rating = ({ rating, setRating }) => {
   return (
-    <div className="flex space-x-1">
+    <div className="flex">
       {[1, 2, 3, 4, 5].map((value, index) => (
         <div
           key={index}
@@ -11,9 +11,9 @@ const Rating = ({ rating, setRating }) => {
           className="cursor-pointer text-yellow-400"
         >
           {index < rating ? (
-            <AiFillStar size={20} />
+            <AiFillStar size={18} />
           ) : (
-            <AiOutlineStar size={20} />
+            <AiOutlineStar size={18} />
           )}
         </div>
       ))}
