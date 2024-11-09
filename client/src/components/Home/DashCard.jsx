@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Rating from "./Rating";
+import { CartContext } from "../../context/CartContext";
 
 const DashCard = ({ name, image, price, description }) => {
   const [rating, setRating] = useState();
   const [quantity, setQuantity] = useState(0);
+  const { addCartItem } = useContext(CartContext);
   return (
-    <div className=" mb-12 group cursor-pointer shadow-lg     ">
+    <div className=" mb-12 group cursor-pointer shadow-lg">
       <div className="relative">
         <img
           src={image}
