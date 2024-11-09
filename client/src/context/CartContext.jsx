@@ -1,24 +1,25 @@
 import { createContext, useState } from "react";
 
-export const CartContext = createContext(null);
+export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+
   const addCartItem = (item) => {
-    const isItemExist = cartItems?.find(
-      (cartItem) => item._id === cartItem._id
-    );
+    const isItemExist = cartItems.find((cartItem) => item._id === cartItem._id);
+
     if (isItemExist) {
-      const newCartItems = cartItems?.map((cartItem) =>
+      const newCartItems = cartItems.map((cartItem) =>
         cartItem._id === item._id
-          ? { ...cartItem, qunatity: item.qunatity + 1 }
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
           : cartItem
       );
-      cartItems(newCartItems);
+      setCartItems(newCartItems);
     } else {
-      setCartItems([...cartItems, item]);
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
   };
+
 
   const removeCartItem = (item) => {
     const newCartItems = cartItems?.filter(
@@ -30,7 +31,7 @@ const CartProvider = ({ children }) => {
   const decrementCartItem = (item) => {
     const newCartItems = cartItems?.map((cartItem) =>
       cartItem._id === item._id
-        ? { ...cartItem, qunatity: item.qunatity - 1 }
+        ? { ...cartItem, quantity: item.quantity - 1 }
         : cartItem
     );
     setCartItems(newCartItems);
@@ -39,18 +40,18 @@ const CartProvider = ({ children }) => {
   const increamentCartItem = (item) => {
     const newCartItems = cartItems?.map((cartItem) =>
       cartItem._id === item._id
-        ? { ...cartItem, qunatity: item.qunatity + 1 }
+        ? { ...cartItem, quantity: item.quantity + 1 }
         : cartItem
     );
     setCartItems(newCartItems);
   };
 
-  const NumberOfCartItems = () => {
-    const NumberOfItems = cartItems?.reduce(
-      (toatl, item) => toatl + item.qunatity,
+  const getCartItemsNumber = () => {
+    const numberOfItems = cartItems?.reduce(
+      (toatl, item) => toatl + item.quantity,
       0
     );
-    return NumberOfItems;
+    return numberOfItems;
   };
 
   return (
@@ -61,7 +62,7 @@ const CartProvider = ({ children }) => {
         removeCartItem,
         increamentCartItem,
         decrementCartItem,
-        NumberOfCartItems,
+        getCartItemsNumber,
       }}
     >
       {children}

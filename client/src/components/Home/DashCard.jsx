@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import Rating from "./Rating";
 import { CartContext } from "../../context/CartContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const DashCard = ({ _id, name, image, price, description }) => {
   const [rating, setRating] = useState();
   const [quantity, setQuantity] = useState(0);
-  const { addCartItem } = useContext(CartContext);
+  const navigate = useNavigate();
+  const handleNavigation = () => {
+    navigate(`/dish-detail/${_id}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className=" mb-12 group flex flex-col overflow-hidden  cursor-pointer shadow-lg">
       <div className="relative">
@@ -49,11 +53,12 @@ const DashCard = ({ _id, name, image, price, description }) => {
           <h4 className="text-amber-600 mt-2 text-lg font-semibold px-1  ">
             ${price}
           </h4>
-          <Link to={`/dish-detail/${_id}`}>
-            <button className="bg-amber-400 p-2 px-3 rounded-md hover:bg-amber-300">
-              View Detail
-            </button>
-          </Link>
+          <button
+            onClick={handleNavigation}
+            className="bg-amber-400 p-2 px-3 rounded-md hover:bg-amber-300"
+          >
+            View Detail
+          </button>
         </div>
       </div>
     </div>

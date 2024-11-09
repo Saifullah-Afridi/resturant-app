@@ -5,6 +5,7 @@ import { HiBars4 } from "react-icons/hi2";
 import HamburgerMenu from "./HamburgerMenu";
 import NavigationLinks from "./NavigationLinks";
 import Cart from "./Cart";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -12,9 +13,11 @@ const Navigation = () => {
     <div className="border-b-2 pb-3 shadow-sm">
       <nav className=" w-[90%] max-w-[1100px]  mx-auto h-12 pt-4 ">
         <div className="h-full flex justify-between items-center  ">
+          <Link to="/" >
           <h1 className="cursor-pointer text-2xl font-bold text-amber-500">
             Tomato.
           </h1>
+          </Link>
           <div className="hidden md:block">
             <NavigationLinks open={open} />
           </div>
