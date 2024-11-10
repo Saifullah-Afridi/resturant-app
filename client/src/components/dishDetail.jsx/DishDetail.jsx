@@ -121,7 +121,7 @@ const DishDetail = () => {
           />
         </div>
         <div className="flex flex-col gap-4 md:w-1/2">
-          <h2 className="text-3xl font-bold border-b-2 border-gray-800">
+          <h2 className="text-3xl font-bold border-b-2 border-gray-800 pb-1 ">
             {dishDetail?.name}
           </h2>
           <p className="text-gray-700">{dishDetail?.description}</p>

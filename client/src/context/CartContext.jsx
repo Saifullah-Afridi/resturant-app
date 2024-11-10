@@ -34,23 +34,25 @@ const CartProvider = ({ children }) => {
     setCartItems(newCartItems);
   };
 
-  const decrementCartItem = (item) => {
-    const newCartItems = cartItems?.map((cartItem) =>
-      cartItem._id === item._id
-        ? { ...cartItem, quantity: item.quantity - 1 }
-        : cartItem
-    );
-    setCartItems(newCartItems);
-  };
+const decrementCartItem = (item) => {
+  const newCartItems = cartItems?.map((cartItem) =>
+    cartItem._id === item._id
+      ? { ...cartItem, quantity: Math.max(cartItem.quantity - 1, 1) }:cartItem 
+  );
+  setCartItems(newCartItems);
+};
 
-  const increamentCartItem = (item) => {
-    const newCartItems = cartItems?.map((cartItem) =>
-      cartItem._id === item._id
-        ? { ...cartItem, quantity: item.quantity + 1 }
-        : cartItem
-    );
-    setCartItems(newCartItems);
-  };
+
+
+const incrementCartItem = (item) => {
+  const newCartItems = cartItems?.map((cartItem) =>
+    cartItem._id === item._id
+      ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+      : cartItem
+  );
+  setCartItems(newCartItems);
+};
+
 
   const getCartItemsNumber = () => {
     const numberOfItems = cartItems?.reduce(
@@ -59,16 +61,23 @@ const CartProvider = ({ children }) => {
     );
     return numberOfItems;
   };
-
+ const getTotalPrice = () => {
+   const totalPrice = cartItems?.reduce(
+     (total, item) => total + item.quantity * item.price,
+     0
+   );
+   return totalPrice;
+ };
   return (
     <CartContext.Provider
       value={{
         cartItems,
         addCartItem,
         removeCartItem,
-        increamentCartItem,
-        decrementCartItem,
         getCartItemsNumber,
+        decrementCartItem,
+        incrementCartItem,
+        getTotalPrice,
       }}
     >
       {children}
