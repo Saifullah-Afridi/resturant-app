@@ -33,7 +33,7 @@ const Cart = () => {
       )}
 
       <div
-        className={`fixed bg-white  top-0 right-0 h-full w-[700px] z-50 transform ${
+        className={`fixed  top-0 right-0 h-full w-[700px] z-50 transform ${
           open ? "translate-x-0" : "translate-x-full"
         } transition-all transform  duration-300  p-4 overflow-auto  px-5 bg-gray-100 `}
       >
