@@ -94,7 +94,7 @@ const DishDetail = () => {
   const [dishDetail, setDishDetail] = useState({});
   const [relatedDishes, setRelatedDishes] = useState([]);
   const { id } = useParams();
-  const {addCartItem } = useContext(CartContext);
+  const { addCartItem } = useContext(CartContext);
 
   useEffect(() => {
     const dish = foodDetails.find((food) => food._id === id);
@@ -161,8 +161,8 @@ const DishDetail = () => {
               </span>
             </span>
             <button
-            className="bg-amber-500 hover:bg-amber-600 text-white py-2 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
-             onClick={() => addCartItem(dishDetail)} 
+              className="bg-amber-500 hover:bg-amber-600 text-white py-2 px-6 rounded-lg transition transform hover:scale-105 shadow-lg"
+              onClick={() => addCartItem(dishDetail)}
             >
               Add to Cart
             </button>
@@ -172,7 +172,7 @@ const DishDetail = () => {
       <div className="my-10 text-center">
         <h3 className="text-2xl font-semibold">Related Dishes</h3>
         <div className="mt-4 flex justify-center">
-          <div className="w-24 h-1 bg-red-600"></div>
+          <div className="w-24  h-1 bg-red-600"></div>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">

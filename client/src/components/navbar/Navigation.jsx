@@ -33,7 +33,7 @@ const Navigation = () => {
               <Cart />
               <button
                 type="button"
-                className="hidden md:block border-[1px] rounded-3xl border-amber-500 py-[3px] px-2 hover:bg-amber-300 transition-all duration-300"
+                className="hidden md:block border-[1px] rounded-3xl border-amber-500 py-[5px]  px-5 hover:bg-amber-300 transition-all duration-300"
               >
                 Sign In
               </button>
