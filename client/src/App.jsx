@@ -11,16 +11,15 @@ import Footer from "./components/footer/Footer";
 const App = () => {
   return (
     <BrowserRouter>
+      <Navigation />
       <Routes>
-        <Route element={<Navigation />}>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/menu" exact element={<Menu />} />
-          <Route path="/contact-us" exact element={<ContactUs />} />
-          <Route path="/dish-detail/:id" exact element={<DishDetail />} />
-        </Route>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/menu" exact element={<Menu />} />
+        <Route path="/contact-us" exact element={<ContactUs />} />
+        <Route path="/dish-detail/:id" exact element={<DishDetail />} />
         <Route path="*" exact element={<Page404 />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 };
