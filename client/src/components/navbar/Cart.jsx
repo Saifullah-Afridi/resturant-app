@@ -90,8 +90,19 @@ const Cart = () => {
               </div>
             ))}
             <div className="flex justify-between items-center my-5 border p-3 border-amber-600 rounded-lg">
-              <h4 className="text-xl text-amber-600 font-medium  " >Totel Price: {getTotalPrice()}$</h4>
-              <button className="bg-amber-500 px-4 py-2 rounded-lg hover:-translate-y-[1px] transition-all duration-75">Order Now</button>
+              <div className="flex flex-col gap-1" >
+                <h4 className="  text-amber-600 font-medium  ">
+                  {" "}
+                  Dishes Price: {getTotalPrice()}$
+                </h4>
+                <h4 className=" text-amber-600 font-medium ">
+                  Delevery Price: 2$
+                </h4>
+                <h4 className=" text-lg text-amber-600 font-medium border-b border-gra"> Totel Price: {getTotalPrice()+ 2}$</h4>
+              </div>
+              <button className="bg-amber-500 px-4 py-2 rounded-lg hover:-translate-y-[1px] transition-all duration-75 self-end">
+                Order Now
+              </button>
             </div>
           </div>
         ) : (

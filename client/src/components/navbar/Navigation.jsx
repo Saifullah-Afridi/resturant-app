@@ -11,7 +11,7 @@ const Navigation = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <div className="border-b-2 pb-3 shadow-sm">
+      <div className="border-b-2 pb-3 shadow-sm sticky top-0 right-0 z-10 bg-amber-100">
         <nav className=" w-[90%] max-w-[1100px]  mx-auto h-12 pt-4 ">
           <div className="h-full flex justify-between items-center  ">
             <Link to="/">

@@ -4,7 +4,7 @@ import ExploreSection from "./ExploreSection";
 import Dishes from "./Dishes";
 
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Noodles");
+  const [selectedCategory, setSelectedCategory] = useState("");
   return (
     <div>
       <HeroSection />
