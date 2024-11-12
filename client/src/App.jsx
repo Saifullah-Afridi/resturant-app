@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import DishDetail from "./components/dishDetail.jsx/DishDetail";
 import Page404 from "./components/404Page/Page404";
 import Footer from "./components/footer/Footer";
+import Skeleton from "./components/Skeleton";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/menu" exact element={<Menu />} />
         <Route path="/contact-us" exact element={<ContactUs />} />
         <Route path="/dish-detail/:id" exact element={<DishDetail />} />
+        <Route path="/skeleton" exact element={<Skeleton />} />
         <Route path="*" exact element={<Page404 />} />
       </Routes>
       <Footer />
