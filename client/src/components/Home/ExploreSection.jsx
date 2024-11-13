@@ -39,7 +39,7 @@ const ExploreSection = ({ selectedCategory, setSelectedCategory }) => {
             aliquam!
           </p>
         </div>
-        {loading && <div className="text-3xl">loading</div>}
+        {loading && <MenuSkeleton count={data.length} />}
         <div className=" mt-6 flex-col flex-wrap  lg:flex-nowrap    sm:flex sm:flex-row  gap-4">
           {data?.map((menu) => (
             <div

@@ -14,7 +14,6 @@ const App = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/dish-detail/:id" exact element={<DishDetail />} />
-        <Route path="/ske" exact element={<MenuSkeleton />} />
         <Route path="*" exact element={<Page404 />} />
       </Routes>
       <Footer />
