@@ -25,6 +25,7 @@ const ExploreSection = ({ selectedCategory, setSelectedCategory }) => {
         setLoading(false);
       });
   }, []);
+  console.log(data);
 
   return (
     <Element name="menu">
@@ -39,27 +40,29 @@ const ExploreSection = ({ selectedCategory, setSelectedCategory }) => {
             aliquam!
           </p>
         </div>
-        {loading && <MenuSkeleton count={data.length} />}
-        <div className=" mt-6 flex-col flex-wrap  lg:flex-nowrap    sm:flex sm:flex-row  gap-4">
-          {data?.map((menu) => (
-            <div
-              key={menu._id}
-              onClick={() => setSelectedCategory(menu.name)}
-              className={`inline-block  md:flex  flex-col items-center mb-4  hover:scale-105 transition-all duration-300  overflow-hidden  cursor-pointer`}
-            >
-              <img
-                src={menu.image.url}
-                alt="menu-image"
-                className={` p-1 ${
-                  selectedCategory === menu.name
-                    ? "border-4 border-amber-600  rounded-full"
-                    : ""
-                }`}
-              />
-              <h5 className="mt-2 inline-block ">{menu.name}</h5>
-            </div>
-          ))}
-        </div>
+        {loading && <MenuSkeleton count={8} />}
+        {data.length > 0 && (
+          <div className=" mt-6 flex-col flex-wrap  lg:flex-nowrap    sm:flex sm:flex-row  gap-4">
+            {data?.map((menu) => (
+              <div
+                key={menu._id}
+                onClick={() => setSelectedCategory(menu.name)}
+                className={`inline-block  md:flex  flex-col items-center mb-4  hover:scale-105 transition-all duration-300  overflow-hidden  cursor-pointer`}
+              >
+                <img
+                  src={menu.image.url}
+                  alt="menu-image"
+                  className={` p-1 ${
+                    selectedCategory === menu.name
+                      ? "border-4 border-amber-600  rounded-full"
+                      : ""
+                  }`}
+                />
+                <h5 className="mt-2 inline-block ">{menu.name}</h5>
+              </div>
+            ))}
+          </div>
+        )}
       </Container>
     </Element>
   );

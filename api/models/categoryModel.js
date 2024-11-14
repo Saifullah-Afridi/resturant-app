@@ -17,6 +17,12 @@ const categorySchema = new mongoose.Schema({
       required: [true, "Please provide image public id"],
     },
   },
+  dishes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Dish",
+    },
+  ],
 });
 
 const Category = mongoose.model("Category", categorySchema);
