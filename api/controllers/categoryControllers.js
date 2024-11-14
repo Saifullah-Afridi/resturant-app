@@ -1,4 +1,5 @@
 const Category = require("../models/categoryModel");
+const Dish = require("../models/dishModel");
 
 const createCategory = async (req, res) => {
   try {
@@ -39,15 +40,38 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-//but you need to delte all the dishes with that id too
-//that we will do it later
 const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    const category = await Category.findByIdAndDelete(id);
+
+    //find all the dishes with the given category
+    let dishesToBeDeleted = await Dish.find({ category: id });
+
+    //now delete the images for each dish which are stored in the cloudinary
+
+    for (const dish of dishesToBeDeleted) {
+      if (dish.image && dish.image.public_id) {
+        await cloudinary.uploader.destroy(dish.image.public_id);
+      }
+    }
+    //now delelte all the dishes with that id
+    await Dish.deleteMany({ category: id });
+
+    //now delete the category
+    //it will return the category which will be delted for further operation
+    //like deleting of the images later
+    const category = await Category.findByIdAndDelete(id, {
+      returnDocument: "before",
+    });
+
+    //delte the image of the category from the cloudinary
+    if (category.image && category.image.public_id) {
+      await cloudinary.uploader.destroy(category.image.public_id);
+    }
+
     res.status(200).json({
       status: "success",
-      message: "Category has been deleted",
+      message: "Category and dishes with that category has been deleted",
     });
   } catch (error) {
     res.status(500).json({
