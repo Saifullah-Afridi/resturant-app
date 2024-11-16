@@ -6,7 +6,7 @@ import DishDetail from "./components/dishDetail.jsx/DishDetail";
 import Page404 from "./components/404Page/Page404";
 import Footer from "./components/footer/Footer";
 import AdminLayout from "./components/admin/adminlayout/AdminLayout";
-import CreateCategory from "./components/admin/category/CreateCategory";
+import Categories from "./components/admin/categories/Categories";
 const App = () => {
   const { pathname } = useLocation();
   return (
@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/dish-detail/:id" exact element={<DishDetail />} />
         <Route path="*" exact element={<Page404 />} />
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="create-category" element={<CreateCategory />} />
+          <Route path="categories" element={<Categories />} />
         </Route>
       </Routes>
       {!pathname.startsWith("/admin") && <Footer />}

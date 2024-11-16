@@ -4,9 +4,9 @@ import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   return (
-    <div className="flex ">
+    <div className="flex flex-row ">
       <Sidebar />
-      <div className="w-[80%] min-h-screen bg-[#FAF3E0]">
+      <div className="w-[80%] bg-[#FAF3E0]">
         <Outlet />
       </div>
     </div>
