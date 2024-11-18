@@ -22,16 +22,19 @@ const Categories = () => {
       </div>
       <div className="flex justify-end mt-2 mr-3 ">
         <button
-          className="bg-[#F39C12] px-8 py-[10px] rounded-md text-[#2C3E50] font-semibold  shadow-sm transition-all duration-300 hover:bg-[#D68910] hover:shadow-lg hover:text-[#555] hover:-translate-y-[1px]"
+          className="bg-[#F39C12] px-8 py-[10px] rounded-md text-[#2C3E50] font-semibold  shadow-sm transition-all duration-300 hover:bg-[#D68910] hover:shadow-lg hover:text-[#555] hover:-translate-y-[1px] mb-5"
           onClick={() => setOpenFormModal(true)}
         >
           Add Category
         </button>
       </div>
+      <div className="z-19">
+
       <CategoriesModal
         openFormModal={openFormModal}
         setOpenFormModal={setOpenFormModal}
-      />
+        />
+        </div>
    {categories && <CategoriesTable categories ={categories}/>}
 
     </div>

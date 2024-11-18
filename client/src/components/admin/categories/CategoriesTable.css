@@ -1,0 +1,46 @@
+/* CategoriesTable.css */
+
+/* Header styles */
+.ag-header {
+  @apply bg-amber-200 text-[14px] font-semibold; 
+}
+
+/* Hover effect for odd rows */
+/* .ag-row:nth-child(odd):hover {
+  background-color: white; 
+} */
+
+/* Background color for even rows */
+/* .ag-row:nth-child(even) {
+  background-color: #f7f7f7; 
+} */
+
+/* Hover effect for even rows */
+/* .ag-row:nth-child(even):hover {
+  background-color: white; 
+} */
+
+/* Cell styling for centering text */
+/* .ag-cell-center {
+  @apply text-center; 
+} */
+
+/* Custom styling for the image column */
+/* .ag-cell img {
+  width: 50px;
+  height: 0px;
+  margin-top: 10px;
+} */
+
+/* Styling for the Edit button */
+/* .ag-cell button {
+  @apply bg-red-500 text-white px-4 py-2 rounded-md;
+} */
+
+/* Optional: Set a max height for rows */
+
+
+/* Optional: Add hover effect for the button */
+/* .ag-cell button:hover {
+  background-color: #f44336; 
+} */

@@ -50,12 +50,12 @@ const CategoriesModal = ({ openFormModal, setOpenFormModal }) => {
   };
 
   return (
-    <div>
+    <div className="z-50">
       {openFormModal && (
-        <div className="absolute top-0 right-0 h-full w-full bg-black opacity-80 flex flex-col items-center justify-center "></div>
+        <div className="absolute z-[90] top-0 right-0 h-full w-full bg-black opacity-80 flex flex-col items-center justify-center "></div>
       )}
       {openFormModal && (
-        <div className="bg-white h-[90vh] w-[900px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-60 rounded-sm">
+        <div className="bg-white z-[99] h-[90vh] w-[900px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-60 rounded-sm">
           <div className=" relative flex justify-center items-center p-3  ">
             <div className="flex flex-col items-center justify-center gap-[2px]  mb-4">
               <h2 className="text-2xl font-semibold tracking-wide text-[#2C3E50]">
