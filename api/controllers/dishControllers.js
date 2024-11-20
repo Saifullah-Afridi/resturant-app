@@ -2,22 +2,24 @@ const Category = require("../models/categoryModel");
 const Dish = require("../models/dishModel");
 
 const createDish = async (req, res) => {
-  const { categoryName } = req.params;
+
   try {
     const image = {
       url: req.file.path,
       public_id: req.file.filename,
     };
-    const category = await Category.findOne({ name: categoryName });
+    let {category}  =req.body
+     const  foundCategory = await Category.findOne({ name: category });
+     
     const dish = await Dish.create({
       image,
       ...req.body,
-      category: category._id,
+      category: foundCategory._id,
     });
 
-    category.dishes.push(dish._id);
+    foundCategory?.dishes?.push(dish._id);
 
-    await category.save();
+    await foundCategory.save();
     res.status(201).json({
       status: "success",
       dish,
@@ -42,7 +44,7 @@ const getAlldishes = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "fail",
-      messsage: error.message,
+      messsage: error,
     });
   }
 };

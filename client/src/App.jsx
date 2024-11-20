@@ -7,6 +7,7 @@ import Page404 from "./components/404Page/Page404";
 import Footer from "./components/footer/Footer";
 import AdminLayout from "./components/admin/adminlayout/AdminLayout";
 import Categories from "./components/admin/categories/Categories";
+import DishesAdmin from "./components/admin/categories/DishesAdmin";
 const App = () => {
   const { pathname } = useLocation();
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="*" exact element={<Page404 />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="categories" element={<Categories />} />
+          <Route path="dishes" element={< DishesAdmin/>} />
         </Route>
       </Routes>
       {!pathname.startsWith("/admin") && <Footer />}

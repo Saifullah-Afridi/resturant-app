@@ -7,10 +7,18 @@ const Categories = () => {
   const [openFormModal, setOpenFormModal] = useState(false);
   const [categories,setCategories] = useState([])
 
+const fetchCategories  = async  ()=>{
+  try {
+  const res = await  axios.get('http://localhost:3000/api/v1/categories')
+  setCategories(res?.data?.categories)
+  } catch (error) {
+    console.log(error.response.data.message);
+    
+  }
+}
+
   useEffect(()=>{
-    axios.get('http://localhost:3000/api/v1/categories').then((res)=>setCategories(res?.data?.categories)
-    ).catch(err=>console.log(err)
-    )
+    fetchCategories();
   },[])
   return (
     <div className="mt-5 mr-4">
@@ -33,6 +41,7 @@ const Categories = () => {
       <CategoriesModal
         openFormModal={openFormModal}
         setOpenFormModal={setOpenFormModal}
+        refetchCategories={fetchCategories}
         />
         </div>
    {categories && <CategoriesTable categories ={categories}/>}

@@ -6,55 +6,55 @@ import "ag-grid-community/styles/ag-theme-quartz.css";
 import "./CategoriesTable.css";
 
 // Column Definitions for Ag-Grid
-const columnDefs = [
-  {
-    headerName: "Name", 
-    field: "name", 
-    cellStyle: {
-      display: "flex",
-      justifyContent: "start",
-      alignItems: "center",
-    },
-  },
-  {
-    headerName: "Image",
-    cellStyle: { marginTop: "5px" },
-    cellRenderer: (params) => (
-      <img width="50px" height="50px" src={params?.data?.image?.url} alt="category image" />
-    ),
-    sortable: false,
-  },
-  { 
-    headerName: "Total dishes", 
-    cellRenderer: (params) => (
-      <span>{params?.data?.dishes?.length || 0}</span>
-    ),
-  },
-  {
-    headerName: "Edit",
-    cellRenderer: (params) => (
-      <button 
-        onClick={() => handleEdit(params.data)} 
-        className="bg-red-500 text-white rounded-md w-full mt-2"
-      >
-        Edit
-      </button>
-    ),
-    sortable: false,
-  },
-  {
-    headerName: "Delete",
-    cellRenderer: (params) => (
-      <button 
-        onClick={() => handleDelete(params.data)} 
-        className="bg-red-500 text-white rounded-md w-full mt-2"
-      >
-        Delete
-      </button>
-    ),
-    sortable: false,
-  },
-];
+// const columnDefs = [
+//   {
+//     headerName: "Name", 
+//     field: "name", 
+//     cellStyle: {
+//       display: "flex",
+//       justifyContent: "start",
+//       alignItems: "center",
+//     },
+//   },
+//   {
+//     headerName: "Image",
+//     cellStyle: { marginTop: "5px" },
+//     cellRenderer: (params) => (
+//       <img width="50px" height="50px" src={params?.data?.image?.url} alt="category image" />
+//     ),
+//     sortable: false,
+//   },
+//   { 
+//     headerName: "Total dishes", 
+//     cellRenderer: (params) => (
+//       <span>{params?.data?.dishes?.length || 0}</span>
+//     ),
+//   },
+//   {
+//     headerName: "Edit",
+//     cellRenderer: (params) => (
+//       <button 
+//         onClick={() => handleEdit(params.data)} 
+//         className="bg-red-500 text-white rounded-md w-full mt-2"
+//       >
+//         Edit
+//       </button>
+//     ),
+//     sortable: false,
+//   },
+//   {
+//     headerName: "Delete",
+//     cellRenderer: (params) => (
+//       <button 
+//         onClick={() => handleDelete(params.data)} 
+//         className="bg-red-500 text-white rounded-md w-full mt-2"
+//       >
+//         Delete
+//       </button>
+//     ),
+//     sortable: false,
+//   },
+// ];
 
 // Handle delete functionality
 const handleDelete = (data) => {

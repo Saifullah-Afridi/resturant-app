@@ -10,14 +10,14 @@ const CategoriesModal = ({ openFormModal, setOpenFormModal }) => {
   const handleChange = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
+      if (file) {
+        setImage(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setImagePreview(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
   };
 
   const formData = new FormData();
@@ -52,7 +52,7 @@ const CategoriesModal = ({ openFormModal, setOpenFormModal }) => {
   return (
     <div className="z-50">
       {openFormModal && (
-        <div className="absolute z-[90] top-0 right-0 h-full w-full bg-black opacity-80 flex flex-col items-center justify-center "></div>
+        <div className="absolute z-[90] top-0 right-0 h-full w-full bg-black opacity-80  "></div>
       )}
       {openFormModal && (
         <div className="bg-white z-[99] h-[90vh] w-[900px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-60 rounded-sm">
