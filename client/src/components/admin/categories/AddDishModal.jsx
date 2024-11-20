@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 
-const AddDishModal = ({openModal,setOpenModal}) => {
+const AddDishModal = ({openModal,setOpenModal,refetchDishes}) => {
  const [formData,setFormData]  = useState({
   name:"",
   description:"",
@@ -59,6 +59,8 @@ const handleSubmit  = async (e)=>{
     })
     if(res){
       setOpenModal(false);
+      refetchDishes()
+
     }
   } catch (error) {
     console.log(error);
