@@ -1,16 +1,17 @@
 const Category = require("../models/categoryModel");
+const cloudinary = require("cloudinary").v2;
+
 const Dish = require("../models/dishModel");
 
 const createDish = async (req, res) => {
-
   try {
     const image = {
       url: req.file.path,
       public_id: req.file.filename,
     };
-    let {category}  =req.body
-     const  foundCategory = await Category.findOne({ name: category });
-     
+    let { category } = req.body;
+    const foundCategory = await Category.findOne({ name: category });
+
     const dish = await Dish.create({
       image,
       ...req.body,
@@ -34,7 +35,7 @@ const createDish = async (req, res) => {
 
 const getAlldishes = async (req, res) => {
   try {
-    const dishes = await Dish.find();
+    const dishes = await Dish.find().populate("category");
 
     res.status(200).json({
       status: "success",
@@ -66,6 +67,8 @@ const getDishDetail = async (req, res) => {
   }
 };
 const updateDishDetail = async (req, res) => {
+  console.log(req.body);
+
   try {
     const { id } = req.params;
     const dish = await Dish.findById(id);
@@ -141,6 +144,8 @@ const searchDishes = async (req, res) => {
 
 const deleteDish = async (req, res) => {
   try {
+    console.log("ehllo");
+
     const { id } = req.params;
 
     const dish = await Dish.findByIdAndDelete(id, { returnDocument: "before" });
@@ -150,10 +155,12 @@ const deleteDish = async (req, res) => {
         $pull: { dishes: dish._id },
       });
     }
+    console.log("1111111111111111111111111111");
 
     if (dish.image && dish.image.public_id) {
       await cloudinary.uploader.destroy(dish.image.public_id);
     }
+    console.log("22222222222222222222222222222222222");
 
     res.status(200).json({
       status: "success",
