@@ -67,7 +67,7 @@ const getDishDetail = async (req, res) => {
   }
 };
 const updateDishDetail = async (req, res) => {
-  console.log(req.body);
+  const { name, category, price, description, flavors, ingredients } = req.body;
 
   try {
     const { id } = req.params;
@@ -84,7 +84,17 @@ const updateDishDetail = async (req, res) => {
       };
       dish.image = image;
     }
-    Object.assign(dish, req.body);
+
+    const isCategory = await Category.findOne({ name: category });
+
+    // Object.assign(dish, req.body);
+    dish.name = name;
+    dish.category = isCategory._id;
+    dish.description = description;
+    dish.flavors = flavors;
+    dish.ingredients = ingredients;
+    dish.price = price;
+
     await dish.save();
 
     res.status(200).json({
