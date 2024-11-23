@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className="w-[22%] min-h-screen  bg-[#3E4A59] px-2">
       {/* logo container */}
       <div>
-        <h1 className="text-3xl mt-3 ml-1 pb-1 text-[#E67E22] font-semibold  border-b-2 border-b-amber-600 tracking-widest cursor-pointer" onClick={()=>navigate("/")}>
+        <h1 className="text-3xl mt-3 ml-1 pb-1 text-[#E67E22] font-semibold  border-b-2 border-b-amber-600 tracking-widest cursor-pointer" onClick={() => navigate("/")}>
           Tomato
         </h1>
         <Link to="categories">
