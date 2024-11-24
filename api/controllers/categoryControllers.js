@@ -1,5 +1,6 @@
 const Category = require("../models/categoryModel");
 const Dish = require("../models/dishModel");
+const cloudinary = require("cloudinary").v2;
 
 const createCategory = async (req, res) => {
   try {
@@ -41,6 +42,8 @@ const getAllCategories = async (req, res) => {
 };
 
 const deleteCategory = async (req, res) => {
+
+  console.log("hello from category controller")
   try {
     const { id } = req.params;
 
@@ -76,7 +79,7 @@ const deleteCategory = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "fail",
-      msessage: error.message,
+      message: error.message,
     });
   }
 };
@@ -99,6 +102,8 @@ const getSingleCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   try {
+    console.log(req.body);
+    
     const { id } = req.params;
 
     const category = await Category.findById(id);

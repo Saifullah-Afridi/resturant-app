@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
-import CategoriesModal from "./CategoriesModal";
 
 import CategoriesTable from "./CategoriesTable";
 import axios from "axios";
+import AddCategoriesModal from "./AddCategoriesModal";
 const Categories = () => {
   const [openFormModal, setOpenFormModal] = useState(false);
-  const [categories,setCategories] = useState([])
+  const [categories, setCategories] = useState([])
 
-const fetchCategories  = async  ()=>{
-  try {
-  const res = await  axios.get('http://localhost:3000/api/v1/categories')
-  setCategories(res?.data?.categories)
-  } catch (error) {
-    console.log(error.response.data.message);
-    
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get('http://localhost:3000/api/v1/categories')
+      setCategories(res?.data?.categories)
+    } catch (error) {
+      console.log(error.response.data.message);
+
+    }
   }
-}
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchCategories();
-  },[])
+  }, [])
   return (
     <div className="mt-5 mr-4">
       <div className="flex flex-col items-center gap-2">
@@ -38,13 +38,13 @@ const fetchCategories  = async  ()=>{
       </div>
       <div className="z-19">
 
-      <CategoriesModal
-        openFormModal={openFormModal}
-        setOpenFormModal={setOpenFormModal}
-        refetchCategories={fetchCategories}
+        <AddCategoriesModal
+          openFormModal={openFormModal}
+          setOpenFormModal={setOpenFormModal}
+          refetchCategories={fetchCategories}
         />
-        </div>
-   {categories && <CategoriesTable categories ={categories}/>}
+      </div>
+      {categories && <CategoriesTable categories={categories} refetchCategories={fetchCategories} />}
 
     </div>
   );

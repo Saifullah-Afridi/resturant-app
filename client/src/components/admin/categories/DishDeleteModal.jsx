@@ -1,17 +1,18 @@
 import axios from 'axios';
-import React from 'react'
 
 const DishDeleteModal = ({ dish, setOpenDeleteModal, refetchDishes }) => {
 
     const handleDelete = async () => {
         try {
-            const res = await axios.delete(`http://localhost:3000/api/v1/dishes/${dish._id}`)
+            await axios.delete(`http://localhost:3000/api/v1/dishes/${dish._id}`)
+            await refetchDishes()
             setOpenDeleteModal(false)
-            refetchDishes()
+
 
         } catch (error) {
             console.log(error);
 
+        } finally {
         }
     }
 
