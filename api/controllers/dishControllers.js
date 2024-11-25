@@ -184,6 +184,16 @@ const deleteDish = async (req, res) => {
   }
 };
 
+
+
+    //  ***********************************      //rating controller/ for later / *******************************
+ 
+
+
+
+
+
+
 module.exports = {
   createDish,
   getAlldishes,
