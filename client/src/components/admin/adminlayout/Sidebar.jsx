@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-[22%] min-h-screen  bg-[#3E4A59] px-2">
+    <div className="">
       {/* logo container */}
       <div>
         <h1 className="text-3xl mt-3 ml-1 pb-1 text-[#E67E22] font-semibold  border-b-2 border-b-amber-600 tracking-widest cursor-pointer" onClick={() => navigate("/")}>
