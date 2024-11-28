@@ -332,7 +332,7 @@ export const food_list = [
   },
 ];
 
-export const foodDetails = [
+export const fosodDetails = [
   {
     _id: "1",
     name: "Greek Salad",
@@ -616,5 +616,141 @@ export const foodDetails = [
       "Baking powder",
       "Almond milk",
     ],
+  },
+];
+
+
+export const foodDetails = [
+  {
+    _id: "1",
+    name: "Greek Salad",
+    image: "/food_1.png",
+    price: 12,
+    description:
+      "A refreshing and classic salad with fresh vegetables and feta cheese, perfect for a light meal.",
+    category: "Salad",
+    flavor: "Fresh, tangy, slightly salty",
+    servingSize: "1 bowl (approx. 300g)",
+    cookingStyle: "Chilled, no-cook",
+    ingredients: "Lettuce, Tomatoes, Cucumbers, Olives, Feta cheese, Olive oil",
+  },
+  {
+    _id: "2",
+    name: "Veg Salad",
+    image: "/food_2.png",
+    price: 18,
+    description:
+      "A vibrant mix of fresh veggies that is both healthy and delicious.",
+    category: "Salad",
+    flavor: "Crunchy, fresh, slightly sweet",
+    servingSize: "1 bowl (approx. 300g)",
+    cookingStyle: "Chilled, no-cook",
+    ingredients: "Lettuce, Carrots, Cucumbers, Bell peppers, Vinaigrette",
+  },
+  {
+    _id: "3",
+    name: "Clover Salad",
+    image: "/food_3.png",
+    price: 16,
+    description: "A flavorful salad with fresh greens and a light dressing.",
+    category: "Salad",
+    flavor: "Earthy, slightly sweet",
+    servingSize: "1 bowl (approx. 300g)",
+    cookingStyle: "Chilled, no-cook",
+    ingredients: "Mixed greens, Radishes, Carrots, Light vinaigrette",
+  },
+  {
+    _id: "4",
+    name: "Chicken Salad",
+    image: "/food_4.png",
+    price: 24,
+    description:
+      "A hearty salad with grilled chicken, perfect for a filling meal.",
+    category: "Salad",
+    flavor: "Savory, slightly smoky",
+    servingSize: "1 bowl (approx. 350g)",
+    cookingStyle: "Grilled and chilled",
+    ingredients:
+      "Grilled chicken, Lettuce, Cherry tomatoes, Cucumbers, Ranch dressing",
+  },
+  {
+    _id: "5",
+    name: "Lasagna Rolls",
+    image: "/food_5.png",
+    price: 14,
+    description:
+      "Savory lasagna rolled with cheese and herbs, baked to perfection.",
+    category: "Rolls",
+    flavor: "Cheesy, hearty",
+    servingSize: "2 rolls (approx. 250g)",
+    cookingStyle: "Baked",
+    ingredients:
+      "Lasagna sheets, Ricotta cheese, Spinach, Tomato sauce, Parmesan",
+  },
+  {
+    _id: "6",
+    name: "Peri Peri Rolls",
+    image: "/food_6.png",
+    price: 12,
+    description:
+      "Spicy rolls with a peri peri sauce, perfect for spice lovers.",
+    category: "Rolls",
+    flavor: "Spicy, tangy",
+    servingSize: "2 rolls (approx. 200g)",
+    cookingStyle: "Baked",
+    ingredients: "Tortilla wraps, Peri peri sauce, Chicken, Lettuce, Cheese",
+  },
+  {
+    _id: "7",
+    name: "Choco Shake",
+    image: "/food_7.png",
+    price: 8,
+    description:
+      "A rich and creamy chocolate shake, perfect for dessert lovers.",
+    category: "Beverage",
+    flavor: "Sweet, chocolaty",
+    servingSize: "1 glass (approx. 300ml)",
+    cookingStyle: "Blended",
+    ingredients: "Milk, Chocolate syrup, Whipped cream, Ice",
+  },
+  {
+    _id: "8",
+    name: "Mango Smoothie",
+    image: "/food_8.png",
+    price: 10,
+    description: "A tropical delight made with fresh mangoes and yogurt.",
+    category: "Beverage",
+    flavor: "Sweet, fruity",
+    servingSize: "1 glass (approx. 300ml)",
+    cookingStyle: "Blended",
+    ingredients: "Mangoes, Yogurt, Honey, Ice",
+  },
+  {
+    _id: "9",
+    name: "Spicy Ramen",
+    image: "/food_9.png",
+    price: 15,
+    description:
+      "A bowl of spicy and flavorful ramen, perfect for spice enthusiasts.",
+    category: "Noodles",
+    flavor: "Spicy, umami",
+    servingSize: "1 bowl (approx. 400g)",
+    cookingStyle: "Boiled",
+    ingredients:
+      "Ramen noodles, Spicy broth, Boiled egg, Green onions, Chili paste",
+  },
+  {
+    _id: "10",
+    name: "Chicken Biryani",
+    image: "/food_10.png",
+    price: 20,
+    description:
+      "A flavorful and aromatic rice dish with tender chicken pieces.",
+    category: "Rice",
+    flavor: "Spiced, savory",
+    servingSize: "1 plate (approx. 500g)",
+    cookingStyle: "Cooked and steamed",
+    ingredients:
+      "Basmati rice, Chicken, Spices, Yogurt, Fried onions, Mint leaves",
   },
 ];

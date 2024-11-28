@@ -6,7 +6,7 @@ const Skeleton = ({ count }) => {
       {Array(count)
         .fill(3)
         .map((_, index) => (
-          <div className="mt-1">
+          <div className="mt-1" key={index}>
             <div>
               <div className=" animate-pulse h-[200px] bg-gray-300"></div>
               <div className="mt-4 flex flex-col gap-4  ">

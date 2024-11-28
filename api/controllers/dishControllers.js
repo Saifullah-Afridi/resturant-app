@@ -53,7 +53,7 @@ const getAlldishes = async (req, res) => {
 const getDishDetail = async (req, res) => {
   const { id } = req.params;
   try {
-    const dish = await Dish.findById(id);
+    const dish = await Dish.findById(id).populate("category")
 
     res.status(200).json({
       status: "success",

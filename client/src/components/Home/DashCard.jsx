@@ -15,7 +15,7 @@ const DashCard = ({ _id, name, image, price, description }) => {
     <div className=" mb-12 group flex flex-col overflow-hidden  cursor-pointer shadow-lg">
       <div className="relative">
         <img
-          src={image}
+          src={image.url}
           alt="food image"
           width="100%"
           className="overflow-hidden group-hover:scale-105 transition-all rounded-t-lg rounded-r-lg    duration-300  "
