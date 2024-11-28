@@ -25,6 +25,7 @@
         password:{
             type:String,
             required: true,
+            // the select will work only for querying methods like findone findbyid
             select: false
         },
         passwordConfirm: {
@@ -42,6 +43,10 @@
         role: {
             type: String,
             default:"user"
+        },
+        isTokenRevoked: {
+            type: Boolean,
+            default:false
         }
     },{timestamps:true});
 
@@ -55,10 +60,10 @@
         next()
     })
 
-userSchema.methods.comparePassword = function (enteredPassword) {
+        userSchema.methods.comparePassword = function (enteredPassword) {
         console.log();
         
-        return bcryptjs.compareSync(this.password,enteredPassword)
+        return bcryptjs.compareSync(enteredPassword,this.password)
     }
 
     const User = mongoose.model('User', userSchema);
