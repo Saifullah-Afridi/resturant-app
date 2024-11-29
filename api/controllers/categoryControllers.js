@@ -87,7 +87,7 @@ const deleteCategory = async (req, res) => {
 const getSingleCategory = async (req, res) => {
   try {
     const { id } = req.params;
-    const category = await Category.findById(id);
+    const category = await Category.findById(id).populate("dishes")
     res.status(200).json({
       status: "success",
       category,

@@ -16,13 +16,12 @@ const App = () => {
       {!pathname.startsWith("/admin") && <Navigation />}
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/dish-detail/:id" exact element={<DishDetail />} />
+        <Route path="/dish-detail/:id" element={<DishDetail />} />
         <Route path="*" exact element={<Page404 />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="categories" element={<Categories />} />
           <Route path="dishes" element={< DishesAdmin />} />
         </Route>
-        <Route path="spinner" element={<Spinner />} />
       </Routes>
       {!pathname.startsWith("/admin") && <Footer />}
     </>
