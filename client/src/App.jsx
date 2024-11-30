@@ -8,7 +8,8 @@ import Footer from "./components/footer/Footer";
 import AdminLayout from "./components/admin/adminlayout/AdminLayout";
 import Categories from "./components/admin/categories/Categories";
 import DishesAdmin from "./components/admin/categories/DishesAdmin";
-import Spinner from "./components/admin/categories/Spinner";
+import Users from "./components/admin/users/users";
+import AuthenticationPage from "./components/navbar/Authentication";
 const App = () => {
   const { pathname } = useLocation();
   return (
@@ -17,11 +18,13 @@ const App = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/dish-detail/:id" element={<DishDetail />} />
-        <Route path="*" exact element={<Page404 />} />
+        <Route path="/auth" element={<AuthenticationPage />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="categories" element={<Categories />} />
           <Route path="dishes" element={< DishesAdmin />} />
+          <Route path="users" element={< Users />} />
         </Route>
+        <Route path="*" exact element={<Page404 />} />
       </Routes>
       {!pathname.startsWith("/admin") && <Footer />}
     </>

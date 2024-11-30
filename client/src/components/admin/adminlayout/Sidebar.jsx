@@ -31,6 +31,16 @@ const Sidebar = () => {
             </div>
           </div>
         </Link>
+        <Link to="users">
+          <div className="mt-2 flex items-center  text-[#FFFFFF] justify-between py-3 px-1 bg-[#E67E22] hover:bg-[#27AE60]  rounded-sm cursor-pointer">
+            <div className="flex items-center gap-2">
+              <HiInboxStack color="#BDC3C7" />
+              <h3 className=" font-semibold tracking-wide text-md">
+                Users Management
+              </h3>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );
