@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Navigation from "./components/navbar/Navigation";
 import Home from "./components/Home/Home";
@@ -10,10 +10,28 @@ import Categories from "./components/admin/categories/Categories";
 import DishesAdmin from "./components/admin/categories/DishesAdmin";
 import Users from "./components/admin/users/users";
 import AuthenticationPage from "./components/navbar/Authentication";
+import LoadingScreen from "./components/LoadingScreen";
+
 const App = () => {
   const { pathname } = useLocation();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setLoading(true);
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    } else {
+      setLoading(false);
+    }
+  }, [pathname]);
+
   return (
     <>
+      {loading && pathname === "/" && <LoadingScreen />} {/* Show loading screen only for root path */}
       {!pathname.startsWith("/admin") && <Navigation />}
       <Routes>
         <Route path="/" exact element={<Home />} />
@@ -21,8 +39,8 @@ const App = () => {
         <Route path="/auth" element={<AuthenticationPage />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="categories" element={<Categories />} />
-          <Route path="dishes" element={< DishesAdmin />} />
-          <Route path="users" element={< Users />} />
+          <Route path="dishes" element={<DishesAdmin />} />
+          <Route path="users" element={<Users />} />
         </Route>
         <Route path="*" exact element={<Page404 />} />
       </Routes>
