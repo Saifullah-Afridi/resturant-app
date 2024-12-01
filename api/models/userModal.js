@@ -65,6 +65,10 @@
         
         return bcryptjs.compareSync(enteredPassword,this.password)
     }
-
+  userSchema.methods.toJSON = function () {
+  const user = this.toObject(); // Convert the Mongoose document to a plain object
+  delete user.password; // Exclude sensitive field
+  return user;
+};
     const User = mongoose.model('User', userSchema);
     module.exports=User

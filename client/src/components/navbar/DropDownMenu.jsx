@@ -22,6 +22,7 @@ const DropDownMenu = () => {
             const res = await axios.get("http://localhost:3000/api/v1/users/log-out", {
                 withCredentials: true,
             })
+        
             logout();
             window.location.reload();
         } catch (error) {

@@ -46,10 +46,10 @@ const Navigation = () => {
               </button>
               <Cart />
               {isLogedIn ? <DropDownMenu /> : <Link
-                to="/auth"
+                to="/log-in"
                 className="hidden md:block border-[1px] rounded-3xl border-amber-500 py-[5px] px-5 hover:bg-amber-300 transition-all duration-300"
               >
-                Sign In
+                Login
               </Link>}
               <div
                 className="block md:hidden rounded-full hover:bg-amber-300  p-3 transition-all duration-300"

@@ -1,79 +1,93 @@
-import React from "react";
+// SignUp.js
+import React, { useState } from "react";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const SignUp = ({
-  setLoginState,
-  setSignUpState,
-  setShowPassword,
-  showPassword,
-}) => {
+const SignUp = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    password: "",
+    passwordConfirm: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/api/v1/users/sign-up", formData);
+      if (response.status === 201) {
+        navigate("/auth/login"); // Redirect to login after successful sign up
+      }
+    } catch (error) {
+      console.error("Sign Up failed:", error);
+    }
+  };
+
   return (
-    <div>
-      <h2 className="text-amber-900 text-xl font-semibold my-4 text-center">
-        Sign Up
-      </h2>
-      <form className="flex flex-col gap-4 px-6 w-[90%] mx-auto ">
-        <input
-          type="text"
-          name="name"
-          id="name"
-          className=" h-8 p-2 border border-gray-800 focus:border-none  focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md"
-          placeholder="Enter your name"
-        />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className=" h-8 p-2 border border-gray-800 focus:border-none  focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md"
-          placeholder="Enter your email  "
-        />
-        <input
-          type="tel"
-          name="phone"
-          id="phone"
-          className=" h-8 p-2 border border-gray-800 focus:border-none  focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md"
-          placeholder="Enter your phone number"
-        />
-        <div className="relative">
-          <input
-            type={`${showPassword ? "text" : "password"}`}
-            name="password"
-            id="password"
-            className=" w-full h-8 p-2 border border-gray-800 focus:border-none  focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md"
-            placeholder="Enter your password"
-          />
-          {showPassword ? (
-            <HiEyeSlash
-              className="absolute top-2 right-2 cursor-pointer rounded-full hover:bg-gray-300"
-              size="18"
-              onClick={() => setShowPassword(false)}
-            />
-          ) : (
-            <HiEye
-              className="absolute top-2 right-2 cursor-pointer rounded-full hover:bg-gray-300"
-              size="18"
-              onClick={() => setShowPassword(true)}
-            />
-          )}
-        </div>
-        <div className="flex justify-between items-center mt-3">
-          <button className=" px-4 py-2 rounded-lg bg-amber-400 border hover:bg-amber-600 transition duration-200">
-            Create an account
+    <div className="flex justify-center items-center min-h-screen bg-amber-100">
+      <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
+        <h2 className="text-2xl font-bold text-center text-amber-700 mb-6">Create Your Account</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {["name", "email", "phone", "address"].map((field) => (
+            <div key={field} className="space-y-1">
+              <input
+                type={field === "email" ? "email" : "text"}
+                name={field}
+                placeholder={`Enter your ${field}`}
+                className="w-full h-12 px-4 border rounded-lg border-gray-300"
+                value={formData[field]}
+                onChange={handleInputChange}
+              />
+            </div>
+          ))}
+          {["password", "passwordConfirm"].map((field, index) => (
+            <div key={field} className="space-y-1 relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name={field}
+                placeholder={`Enter your ${field}`}
+                className="w-full h-12 px-4 border rounded-lg border-gray-300"
+                value={formData[field]}
+                onChange={handleInputChange}
+              />
+              {index === 0 && (
+                <span
+                  className="absolute top-3 right-3 text-gray-500 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <HiEyeSlash size={20} /> : <HiEye size={20} />}
+                </span>
+              )}
+            </div>
+          ))}
+          <button
+            type="submit"
+            className="w-full h-12 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600"
+          >
+            Sign Up
           </button>
-          <span>
-            Already have an account
-            <span
-              className="text-blue-700 ml-1 cursor-pointer hover:underline"
-              onClick={() => {
-                setSignUpState(false);
-                setLoginState(true);
-              }}
-            >
-              Login{" "}
-            </span>
+        </form>
+        <div className="mt-4 text-center">
+          Already have an account?{" "}
+          <span
+            className="text-amber-700 font-semibold cursor-pointer hover:underline"
+            onClick={() => navigate("/auth/login")}
+          >
+            Log In
           </span>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

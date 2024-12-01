@@ -11,6 +11,7 @@ import DishesAdmin from "./components/admin/categories/DishesAdmin";
 import Users from "./components/admin/users/users";
 import AuthenticationPage from "./components/navbar/Authentication";
 import LoadingScreen from "./components/LoadingScreen";
+import Login from "./components/Login";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -36,7 +37,8 @@ const App = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/dish-detail/:id" element={<DishDetail />} />
-        <Route path="/auth" element={<AuthenticationPage />} />
+        <Route path="/sign-up" element={<AuthenticationPage />} />
+        <Route path="/log-in" element={<Login />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="categories" element={<Categories />} />
           <Route path="dishes" element={<DishesAdmin />} />

@@ -47,8 +47,9 @@ const AuthenticationPage = () => {
         const response = await axios.post("http://localhost:3000/api/v1/users/log-in", payload, {
           withCredentials: true
         });
+        const userData = response.data.user
         if (response.status === 200) {
-          login();
+          login(userData);
           navigate("/");
         }
       } catch (error) {
