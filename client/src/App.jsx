@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <>
-      {loading && pathname === "/" && <LoadingScreen />} {/* Show loading screen only for root path */}
+      {loading && pathname === "/" && <LoadingScreen />}
       {!pathname.startsWith("/admin") && <Navigation />}
       <Routes>
         <Route path="/" exact element={<Home />} />

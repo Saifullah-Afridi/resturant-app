@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { HiBars4 } from "react-icons/hi2";
@@ -6,12 +6,23 @@ import HamburgerMenu from "./HamburgerMenu";
 import NavigationLinks from "./NavigationLinks";
 import Cart from "./Cart";
 import { Link, Outlet } from "react-router-dom";
-import Authentication from "./Authentication";
+import { AuthContext } from "../../context/authContext";
+import DropDownMenu from "./DropDownMenu";
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
   const [loginState, setLoginState] = useState(false);
   const [signupState, setSignUpState] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { isLogedIn } = useContext(AuthContext)
+
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
   return (
     <>
       <div className="border-b-2 pb-3 shadow-sm sticky top-0 right-0 z-10 bg-amber-100">
@@ -34,12 +45,12 @@ const Navigation = () => {
                 <HiMiniMagnifyingGlass />
               </button>
               <Cart />
-              <Link
+              {isLogedIn ? <DropDownMenu /> : <Link
                 to="/auth"
                 className="hidden md:block border-[1px] rounded-3xl border-amber-500 py-[5px] px-5 hover:bg-amber-300 transition-all duration-300"
               >
                 Sign In
-              </Link>
+              </Link>}
               <div
                 className="block md:hidden rounded-full hover:bg-amber-300  p-3 transition-all duration-300"
                 onClick={() => setOpen(true)}

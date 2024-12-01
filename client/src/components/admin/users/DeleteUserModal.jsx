@@ -4,13 +4,14 @@ import Spinner from "../categories/Spinner";
 
 const DeleteUserModal = ({ openDeleteModal, handleCloseModal, selectedUser, refetchUsers }) => {
     const [loading, setLoading] = useState(false);
+    console.log(selectedUser);
 
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/api/v1/users/${selectedUser.id}`);
+            await axios.delete(`http://localhost:3000/api/v1/users/${selectedUser._id}`);
             await refetchUsers();
-            setOpenDeleteModal(false);
+            handleCloseModal();
         } catch (error) {
             console.error("Error deleting user:", error?.response?.data?.message);
         } finally {

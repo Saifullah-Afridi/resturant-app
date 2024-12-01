@@ -75,26 +75,31 @@
                     messsage:"Please provide correct credientials"
                 })
             }
+             console.log(user);
 
         const token =  await jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
             expiresIn:"9d"
         })
+            
             user = await User.findByIdAndUpdate(user._id, {
                 isTokenRevoked:false
             },{new:true})
             
+console.log(token);
 
-            
             res.cookie("token", token, {
                 httpOnly: true,
-                // secure: true, //it will only be true in production mode...why ....check it later
+                secure: false,
                 maxAge: 9 * 24 * 60 * 60 * 1000,
             })
+           
+            
             res.status(200).json({
                 stauts: "success",
                 user
             })
         } catch (error) {
+            console.log(error);
             
             res.status(500).json({
                 status: "fail",
@@ -116,7 +121,7 @@
 
         res.clearCookie("token", {
             httpOnly: true,
-            secure: true,
+            secure: false,
         })
         res.status(200).json({
             status: "success",
@@ -133,6 +138,7 @@
 
 
     const protectedRoutes = async (req, res,next) => {
+        console.log(req.cookies.token);
         
         const token = req.cookies?.token;
         
@@ -160,6 +166,8 @@
                 message: "Your session has ended. Please log in again",
             })
         }
+        console.log("here");
+        
         req.user = currentUser
         
         next()

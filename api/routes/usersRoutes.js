@@ -9,7 +9,7 @@ router.post("/sign-up", SignUp)
 
 //auth routes
 router.post("/log-in",logIn)
-router.post("/log-out", protectedRoutes, logOut)
+router.get("/log-out", protectedRoutes, logOut)
 
 
 //userRoutes
