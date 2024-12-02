@@ -13,6 +13,10 @@ import AuthenticationPage from "./components/navbar/Authentication";
 import LoadingScreen from "./components/LoadingScreen";
 import Login from "./components/Login";
 
+
+//role based authentication
+//tomorrow task
+
 const App = () => {
   const { pathname } = useLocation();
   const [loading, setLoading] = useState(true);
