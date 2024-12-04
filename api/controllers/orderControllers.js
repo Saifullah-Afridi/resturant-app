@@ -1,8 +1,18 @@
 const Order = require("../models/orderModal");
-const Dish  = require("../models/dishModel")
+const Dish = require("../models/dishModel")
+
+
+
 const createOrder = async (req, res) => {
+
+
+
+ 
+  
     const userId = req.user._id
     const {dishes,deliveryDetails} = req.body
+    console.log(dishes);
+    
     try {
         if (!deliveryDetails || !deliveryDetails.name || !deliveryDetails.phone || !deliveryDetails.address) {
             return res.status(400).json({
@@ -13,7 +23,7 @@ const createOrder = async (req, res) => {
         let populatedDishes = []
         let dishesPrice = 0
         for (const item of dishes) {
-            const dish = await Dish.findById(item.dish)
+            const dish = await Dish.findById(item._id)
             if (!dish) {
                 return res.status(404).json({
                     status: "fail",
@@ -144,7 +154,6 @@ exports.updateDefaultDeliveryPrice = async (req, res) => {
       });
     }
 
-    // Update the default value for deliveryPrice field
     Order.schema.paths.deliveryPrice.default(() => newDefault);
 
     res.status(200).json({
@@ -158,3 +167,11 @@ exports.updateDefaultDeliveryPrice = async (req, res) => {
     });
   }
 };
+
+
+module.exports = {
+  createOrder,
+}
+
+
+

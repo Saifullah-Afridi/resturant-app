@@ -3,6 +3,7 @@ const app = express();
 const categoryRoutes = require("./routes/categoryRoutes");
 const dishesRoutes = require("./routes/dishRoutes");
 const usersRoutes = require("./routes/usersRoutes");
+const ordersRoutes = require("./routes/orderRoutes");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -21,6 +22,7 @@ app.use(cookieParser())
 app.use("/api/v1/categories", categoryRoutes);
 app.use("/api/v1/dishes", dishesRoutes);
 app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/orders", ordersRoutes);
 
 //exporting app
 module.exports = app;

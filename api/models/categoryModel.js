@@ -10,11 +10,9 @@ const categorySchema = new mongoose.Schema({
   image: {
     url: {
       type: String,
-      required: [true, "Please provide image URl"],
     },
     public_id: {
       type: String,
-      required: [true, "Please provide image public id"],
     },
   },
   dishes: [

@@ -16,12 +16,11 @@ const orderSchema = new mongoose.Schema({
             quantity: {
                 type: Number,
                 required:true
-            }
+            },
         }    
     ],
     dishesPrice: {
         type: Number,
-        required:true,
     },
     deliveryPrice: {
         type: Number,      
@@ -29,7 +28,6 @@ const orderSchema = new mongoose.Schema({
     },
     totalPrice: {
         type: Number,
-        required:true
     },
     status: {
         type: String,
@@ -43,6 +41,5 @@ const orderSchema = new mongoose.Schema({
     },
 },{timestamps:true});
 
-//Export the model
 const Order = mongoose.model('Order', orderSchema);
 module.exports = Order
