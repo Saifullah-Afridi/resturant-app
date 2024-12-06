@@ -19,24 +19,24 @@ import Login from "./components/Login";
 
 const App = () => {
   const { pathname } = useLocation();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (pathname === "/") {
-      setLoading(true);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+  // useEffect(() => {
+  //   if (pathname === "/") {
+  //     setLoading(true);
+  //     const timer = setTimeout(() => {
+  //       setLoading(false);
+  //     }, 2000);
 
-      return () => clearTimeout(timer);
-    } else {
-      setLoading(false);
-    }
-  }, [pathname]);
+  //     return () => clearTimeout(timer);
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // }, [pathname]);
 
   return (
     <>
-      {loading && pathname === "/" && <LoadingScreen />}
+      {/* {loading && pathname === "/" && <LoadingScreen />} */}
       {!pathname.startsWith("/admin") && <Navigation />}
       <Routes>
         <Route path="/" exact element={<Home />} />

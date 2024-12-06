@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   HiArrowLeft,
   HiOutlineShoppingBag,
@@ -20,13 +20,21 @@ const Cart = () => {
   } = useContext(CartContext);
   const [open, setOpen] = useState(false);
   const [currentstate, setCurrentState] = useState("cart");
+  const [pendingOrder, setPendingOrder] = useState(false)
   const [deliveryDetails, setDeliveryDetails] = useState({
     name: "",
     phone: "",
     address: "",
   })
-
+  const [priceDetail, setPriceDetail] = useState({
+    dishesPrice: JSON.parse(localStorage.getItem("dishesPrice")) || 0,
+    deliveryPrice: JSON.parse(localStorage.getItem("deliveryPrice")) || 0,
+    totalPrice: JSON.parse(localStorage.getItem("totalPrice")) || 0,
+  })
+  const [orderStatus, setOrderStatus] = useState(JSON.parse(localStorage.getItem("orderStatus")) || null)
   const [placeOrder, setPlaceOrder] = useState(JSON.parse(localStorage.getItem('placeOrder') || false))
+
+
 
   const handleInput = (e) => {
     setDeliveryDetails({
@@ -35,11 +43,32 @@ const Cart = () => {
   }
 
   const handleSumbit = async () => {
+    if (pendingOrder) {
+      alert("You already have a pending order. Complete it before placing a new one.");
+      return;
+    }
     const dishes = cartItems
-    console.log(deliveryDetails, dishes);
     try {
       const res = await axios.post("http://localhost:3000/api/v1/orders", { deliveryDetails, dishes }, {
         withCredentials: true
+      })
+      const orderId = res.data.newOrder._id
+      const responseOrderDetail = await axios.get(`http://localhost:3000/api/v1/orders/${orderId}`, {
+        withCredentials: true
+      })
+      localStorage.setItem("orderStatus", JSON.stringify(responseOrderDetail.data.order.status))
+      setOrderStatus(responseOrderDetail.data.order.status)
+      localStorage.setItem("dishesPrice", JSON.stringify(responseOrderDetail.data.order.dishesPrice))
+
+      localStorage.setItem("deliveryPrice", JSON.stringify(
+        responseOrderDetail.data.order.deliveryPrice
+      ))
+      localStorage.setItem("totalPrice", JSON.stringify(responseOrderDetail.data.order.totalPrice))
+      localStorage
+      setPriceDetail({
+        dishesPrice: responseOrderDetail.data.order.dishesPrice,
+        deliveryPrice: responseOrderDetail.data.order.deliveryPrice,
+        totalPrice: responseOrderDetail.data.order.totalPrice
       })
       clearCart();
       setDeliveryDetails({
@@ -57,7 +86,34 @@ const Cart = () => {
 
   }
 
+  const fetchOrders = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/v1/orders/order-by-me", {
+        withCredentials: true
+      })
+      const myOrders = res.data.myOrders
+      const pendingOrderStatus = myOrders.find(order => order.status === "pending")
+      if (pendingOrderStatus) {
+        setPendingOrder(true)
+      }
+      console.log(res);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
   const navigate = useNavigate()
+
+
+  useEffect(() => {
+    if (placeOrder) {
+      fetchOrders();
+    }
+  }, [placeOrder]);
+
+
+
   return (
     <>
       <button
@@ -87,7 +143,7 @@ const Cart = () => {
 
             <div className="mt-5 w-full bg-white p-4 rounded-lg shadow-lg">
               <h4 className="text-lg font-semibold text-gray-600">Order Status</h4>
-              <p className="mt-2 text-xl font-bold text-green-500">In Progress</p>
+              <p className="mt-2 text-xl font-bold text-green-500">{orderStatus}</p>
               <p className="mt-2 text-gray-700">Your order is on its way to the kitchen.</p>
             </div>
 
@@ -102,7 +158,11 @@ const Cart = () => {
               </button>
               <button
                 className="bg-gray-300 px-6 py-2 rounded-lg hover:bg-gray-400 transition-all"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false)
+                  fetchOrders()
+
+                }}
               >
                 Close
               </button>
@@ -125,15 +185,15 @@ const Cart = () => {
                   <h4 className="text-lg font-semibold text-amber-600">Order Summary</h4>
                   <div className="flex justify-between items-center py-2">
                     <span>Dishes Price:</span>
-                    <span>{getTotalPrice()}$</span>
+                    <span>{priceDetail.dishesPrice}$</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span>Delivery Fee:</span>
-                    <span>2$</span>
+                    <span>{priceDetail.deliveryPrice}$</span>
                   </div>
                   <div className="flex justify-between items-center py-2 font-semibold">
                     <span>Total Price:</span>
-                    <span>{getTotalPrice() + 2}$</span>
+                    <span>{priceDetail.totalPrice}$</span>
                   </div>
                 </div>
 

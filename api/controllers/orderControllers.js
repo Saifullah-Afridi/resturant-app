@@ -4,14 +4,8 @@ const Dish = require("../models/dishModel")
 
 
 const createOrder = async (req, res) => {
-
-
-
- 
-  
     const userId = req.user._id
     const {dishes,deliveryDetails} = req.body
-    console.log(dishes);
     
     try {
         if (!deliveryDetails || !deliveryDetails.name || !deliveryDetails.phone || !deliveryDetails.address) {
@@ -61,8 +55,10 @@ const createOrder = async (req, res) => {
 
 
 const getAllOrderByMe = async (req, res) => {
+  console.log("here");
+  
     try {
-        const myOrders = await Order.findOne({user:req.user._id}).populate("dishes.dish");
+        const myOrders = await Order.find({user:req.user.id}).populate("dishes.dish");
         if (!myOrders) {
             return res.status(404).json({
                 status: "fail",
@@ -74,6 +70,8 @@ const getAllOrderByMe = async (req, res) => {
             status: "success",
             myOrders
         })
+      console.log(myOrders,"myorders");
+      
     } catch (error) {
         res.status(500).json({
             status: "fail",
@@ -102,7 +100,7 @@ const getAllOrders = async (req, res) => {
         })
     }
 }
-exports.updateOrderStatus = async (req, res) => {
+const updateOrderStatus = async (req, res) => {
   try {
     const { orderId } = req.params;
     const { status } = req.body;
@@ -130,8 +128,8 @@ exports.updateOrderStatus = async (req, res) => {
 
 const getOrderById = async (req, res) => {
   try {
-    const { orderId } = req.params;
-    const order = await Order.findById(orderId).populate("dishes.dish");
+    const { id } = req.params;
+    const order = await Order.findById(id).populate("dishes.dish");
 
     if (!order) {
       return res.status(404).json({ status: "fail", message: "Order not found" });
@@ -143,7 +141,7 @@ const getOrderById = async (req, res) => {
   }
 };
 
-exports.updateDefaultDeliveryPrice = async (req, res) => {
+const updateDefaultDeliveryPrice = async (req, res) => {
   try {
     const { newDefault } = req.body;
 
@@ -171,6 +169,11 @@ exports.updateDefaultDeliveryPrice = async (req, res) => {
 
 module.exports = {
   createOrder,
+  getAllOrderByMe,
+  getAllOrders,
+  updateOrderStatus,
+  updateDefaultDeliveryPrice,
+  getOrderById
 }
 
 

@@ -138,7 +138,6 @@ console.log(token);
 
 
     const protectedRoutes = async (req, res,next) => {
-        console.log(req.cookies.token);
         
         const token = req.cookies?.token;
         
@@ -152,7 +151,6 @@ console.log(token);
         
         const currentUser = await User.findById(payload._id)
         
-
         // if the user still exist or not 
         if (!currentUser) {
                 return res.status(401).json({
@@ -166,7 +164,6 @@ console.log(token);
                 message: "Your session has ended. Please log in again",
             })
         }
-        console.log("here");
         
         req.user = currentUser
         
