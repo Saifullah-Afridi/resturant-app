@@ -43,8 +43,18 @@ const Cart = () => {
   }
 
   const handleSumbit = async () => {
+    console.log(pendingOrder);
     if (pendingOrder) {
       alert("You already have a pending order. Complete it before placing a new one.");
+      clearCart();
+      setDeliveryDetails({
+        name: "",
+        address: "",
+        phone: "",
+      })
+      setCurrentState("cart")
+
+
       return;
     }
     const dishes = cartItems
@@ -79,7 +89,6 @@ const Cart = () => {
       localStorage.setItem('placeOrder', "true");
       setPlaceOrder(true)
       setCurrentState("cart")
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +105,6 @@ const Cart = () => {
       if (pendingOrderStatus) {
         setPendingOrder(true)
       }
-      console.log(res);
 
     } catch (error) {
       console.log(error);
@@ -282,11 +290,11 @@ const Cart = () => {
                         Dishes Price: {getTotalPrice()}$
                       </h4>
                       <h4 className=" text-amber-600 font-medium ">
-                        Delevery Price: 2$
+                        Delevery Price: {priceDetail.deliveryPrice}$
                       </h4>
                       <h4 className=" text-lg text-amber-600 font-medium border-b border-gra">
                         {" "}
-                        Totel Price: {getTotalPrice() + 2}$
+                        Totel Price: {getTotalPrice() + priceDetail.deliveryPrice}$
                       </h4>
                     </div>
                     <button
