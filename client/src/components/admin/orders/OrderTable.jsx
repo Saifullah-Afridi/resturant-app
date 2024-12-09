@@ -3,10 +3,14 @@ import { AgGridReact } from 'ag-grid-react';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import UpdateStatusModal from './UpdateStatusModal';
+import ViewOrderDetail from './ViewOrderDetail';
 
 const OrderTable = ({ orders, fetchOrders }) => {
     const [openUpdateStatusModal, setOpenUpdateStatusModal] = useState(false)
+    const [openViewDetailModal, setOpenViewDetailModal] = useState(false);
+
     const [orderDetail, setOrderDetail] = useState({})
+
     const columnsDef = [{
 
         headerName: "Name",
@@ -38,7 +42,10 @@ const OrderTable = ({ orders, fetchOrders }) => {
     {
         headerName: "View Detail",
         width: 150,
-        cellRenderer: (params) => <button className='bg-green-500 w-full mt-2 rounded-lg' >View</button>,
+        cellRenderer: (params) => <button onClick={() => {
+            setOpenViewDetailModal(true);
+            setOrderDetail(params.data);
+        }} className='bg-green-500 w-full mt-2 rounded-lg' >View</button>,
         sortable: false
     },
     {
@@ -58,6 +65,15 @@ const OrderTable = ({ orders, fetchOrders }) => {
 
 
             {openUpdateStatusModal && <UpdateStatusModal isOpen={openUpdateStatusModal} handleOpen={setOpenUpdateStatusModal} refetchOrder={fetchOrders} orderDetail={orderDetail} />}
+
+
+            {openViewDetailModal && (
+                <ViewOrderDetail
+                    isOpen={openViewDetailModal}
+                    handleOpen={setOpenViewDetailModal}
+                    orderDetail={orderDetail}
+                />
+            )}
         </>
     )
 }
