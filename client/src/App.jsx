@@ -12,6 +12,7 @@ import Users from "./components/admin/users/users";
 import AuthenticationPage from "./components/navbar/Authentication";
 import LoadingScreen from "./components/LoadingScreen";
 import Login from "./components/Login";
+import Orders from "./components/admin/orders/orders";
 
 
 //role based authentication
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="categories" element={<Categories />} />
           <Route path="dishes" element={<DishesAdmin />} />
           <Route path="users" element={<Users />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
         <Route path="*" exact element={<Page404 />} />
       </Routes>

@@ -82,13 +82,13 @@ const getAllOrderByMe = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find({}).populate("dishes.dish")
+        const orders = await Order.find({}).populate("dishes.dish").populate("user")
         if (!orders) {
             return res.status(404).josn({
                 status: "fail",
                 message:"There is no order yet"
             })
-        }
+      }
         res.status(200).json({
             status: "success",
             orders
@@ -101,9 +101,15 @@ const getAllOrders = async (req, res) => {
     }
 }
 const updateOrderStatus = async (req, res) => {
+  console.log(req.body);
+  console.log(req.url);
+  
+  
   try {
-    const { orderId } = req.params;
+    console.log(req.params)
+    const { id } = req.params;
     const { status } = req.body;
+console.log(status);
 
     const validStatuses = ["pending", "onTheWay", "delivered"];
     if (!validStatuses.includes(status)) {
@@ -111,7 +117,7 @@ const updateOrderStatus = async (req, res) => {
     }
 
     const updatedOrder = await Order.findByIdAndUpdate(
-      orderId,
+      id,
       { status },
       { new: true }
     );
@@ -119,6 +125,7 @@ const updateOrderStatus = async (req, res) => {
     if (!updatedOrder) {
       return res.status(404).json({ message: "Order not found" });
     }
+console.log(updatedOrder);
 
     res.status(200).json({ message: "Order status updated", order: updatedOrder });
   } catch (error) {

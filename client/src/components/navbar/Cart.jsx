@@ -31,9 +31,10 @@ const Cart = () => {
     deliveryPrice: JSON.parse(localStorage.getItem("deliveryPrice")) || 0,
     totalPrice: JSON.parse(localStorage.getItem("totalPrice")) || 0,
   })
-  const [orderStatus, setOrderStatus] = useState(JSON.parse(localStorage.getItem("orderStatus")) || null)
+  const [orderStatus, setOrderStatus] = useState(JSON.parse(localStorage.getItem("orderStatus")))
   const [placeOrder, setPlaceOrder] = useState(JSON.parse(localStorage.getItem('placeOrder') || false))
 
+  const [orderId, setOrderId] = useState(null)
 
 
   const handleInput = (e) => {
@@ -41,9 +42,11 @@ const Cart = () => {
       ...deliveryDetails, [e.target.name]: e.target.value
     })
   }
+  const navigate = useNavigate()
+
+
 
   const handleSumbit = async () => {
-    console.log(pendingOrder);
     if (pendingOrder) {
       alert("You already have a pending order. Complete it before placing a new one.");
       clearCart();
@@ -62,8 +65,11 @@ const Cart = () => {
       const res = await axios.post("http://localhost:3000/api/v1/orders", { deliveryDetails, dishes }, {
         withCredentials: true
       })
-      const orderId = res.data.newOrder._id
-      const responseOrderDetail = await axios.get(`http://localhost:3000/api/v1/orders/${orderId}`, {
+      const newOrderId = res.data.newOrder._id;
+      console.log(newOrderId);
+
+      setOrderId(newOrderId)
+      const responseOrderDetail = await axios.get(`http://localhost:3000/api/v1/orders/${newOrderId}`, {
         withCredentials: true
       })
       localStorage.setItem("orderStatus", JSON.stringify(responseOrderDetail.data.order.status))
@@ -101,6 +107,7 @@ const Cart = () => {
         withCredentials: true
       })
       const myOrders = res.data.myOrders
+
       const pendingOrderStatus = myOrders.find(order => order.status === "pending")
       if (pendingOrderStatus) {
         setPendingOrder(true)
@@ -111,17 +118,50 @@ const Cart = () => {
 
     }
   }
-  const navigate = useNavigate()
 
+
+
+  const pollOrderStatus = async () => {
+    console.log("kkkkkk");
+
+    if (!orderId) {
+      return
+    }
+    try {
+      const response = await axios.get(`http://localhost:3000/api/v1/orders/${orderId}`, {
+        withCredentials: true
+      })
+
+      const updatedStatus = response.data.order.status
+      console.log("sdfkjdh");
+      if (updatedStatus !== orderStatus) {
+        console.log("sdfkjdh");
+
+        setOrderStatus(updatedStatus)
+        localStorage.setItem("orderStatus", JSON.stringify(updatedStatus))
+      }
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
 
   useEffect(() => {
     if (placeOrder) {
       fetchOrders();
     }
-  }, [placeOrder]);
+  }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (orderId) {
+        pollOrderStatus()
+      }
+    }, 5000)
+    return () => clearInterval(interval)
 
-
+  }, [orderId, orderStatus])
   return (
     <>
       <button
