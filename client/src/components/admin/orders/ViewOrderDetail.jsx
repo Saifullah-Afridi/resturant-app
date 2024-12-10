@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useReactToPrint } from 'react-to-print';
+import InvoiceContent from "./InvoiceContent";
 
 const ViewOrderDetail = ({ isOpen, handleOpen, orderDetail }) => {
-    const { dishes, deliveryDetails, totalPrice, deliveryPrice } = orderDetail;
-    console.log(orderDetail);
+    const { deliveryDetails, totalPrice, deliveryPrice } = orderDetail;
+    const componentRef = useRef();
+
+    // Set up react-to-print with the contentRef
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,  // The reference to the content to be printed
+    });
 
     return isOpen ? (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-600 bg-opacity-50 z-[999]">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-3/5">
+        <div className="fixed h-full w-full inset-0 flex justify-center items-center bg-gray-600 bg-opacity-50 z-[999]">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-3/5 h-[500px] overflow-auto">
+
+                {/* Pass the ref to InvoiceContent */}
+                <InvoiceContent ref={componentRef} orderDetail={orderDetail} />
+
                 <h2 className="text-xl font-semibold mb-4 text-blue-600">Order Details</h2>
 
                 <p className="mb-2 text-gray-800">
@@ -41,7 +52,7 @@ const ViewOrderDetail = ({ isOpen, handleOpen, orderDetail }) => {
                                         />
                                     </td>
                                     <td className="">{dish.dish.name}</td>
-                                    <td >{dish.dish.price}$</td>
+                                    <td>{dish.dish.price}$</td>
                                     <td className="border border-gray-300 p-2">{dish.quantity}</td>
                                     <td className="border border-gray-300 p-2">
                                         ${dish.dish.price * dish.quantity}
@@ -58,18 +69,23 @@ const ViewOrderDetail = ({ isOpen, handleOpen, orderDetail }) => {
                     </p>
                     <p className="text-gray-700">
                         <strong>Dishes Price:</strong> $
-                        {orderDetail.dishesPrice
-                        }
+                        {orderDetail.dishesPrice}
                     </p>
                     <p className="text-gray-900 font-semibold">
                         <strong>Total Price:</strong> ${totalPrice}
                     </p>
                 </div>
 
-                <div className="mt-6 text-right">
+                <div className="mt-6 flex justify-between gap-2">
+                    <button
+                        className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-gray-400 flex-1"
+                        onClick={handlePrint}
+                    >
+                        Print Invoice
+                    </button>
                     <button
                         onClick={() => handleOpen(false)}
-                        className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                        className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-gray-400 flex-1"
                     >
                         Close
                     </button>
